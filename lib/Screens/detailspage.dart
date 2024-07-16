@@ -87,7 +87,7 @@ class _DetailspageState extends State<Detailspage> {
                           for (int i = 0; i < 4; i++)
                             Icon(Icons.star, color: Colors.green),
 
-                          // Conditionally add a half star if needed
+                      
                           if (4.5 % 1 != 0)
                             Icon(Icons.star_half, color: Colors.green),
                         ],
@@ -140,15 +140,15 @@ class _DetailspageState extends State<Detailspage> {
                       SizedBox(width: 6,),
                       Wrap(
                         alignment: WrapAlignment.start,
-                        // Align children starting from the left
+                        
                         spacing: -2.0,
-                        // Negative spacing to overlap icons
+                       
                         children: [
                           // Loop to generate full stars
                           for (int i = 0; i < 4; i++)
                             Icon(Icons.star, color: Colors.green),
 
-                          // Conditionally add a half star if needed
+                      
                           if (4.5 % 1 != 0)
                             Icon(Icons.star_half, color: Colors.green),
                         ],
@@ -194,11 +194,11 @@ class _DetailspageState extends State<Detailspage> {
                       Spacer(),
                       ElevatedButton.icon(
                         onPressed: () {
-                          // Add to cart functionality
+                   
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.green, // Background color
-                          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8), // Padding inside button
+                          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                           textStyle: TextStyle(fontSize: 16),
                         ),
                         icon: Icon(Icons.shopping_bag, color: Colors.white),
