@@ -8,7 +8,7 @@ class ImageCard extends StatelessWidget {
   final double imageWidth;
   final double imageHeight;
   final String? price;
-  final bool showRating; // Boolean to control whether to show the rating or not
+  final bool showRating; 
 
   // Constructor
   ImageCard({
@@ -32,12 +32,12 @@ class ImageCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // Image with optional tag
+        
           Stack(
             children: [
               Container(
-                width: imageWidth, // Adjust the width as needed
-                height: imageHeight, // Adjust the height as needed
+                width: imageWidth, 
+                height: imageHeight, 
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage(imagePath),
@@ -75,7 +75,7 @@ class ImageCard extends StatelessWidget {
               textAlign: TextAlign.start,
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
-          ],// Rating (conditionally display if showRating is true)
+          ],
           if (showRating) ...[
             SizedBox(height: 8),
             Row(
@@ -90,9 +90,7 @@ class ImageCard extends StatelessWidget {
               ],
             ),
           ],
-          // Name (conditionally display)
-
-          // Price (conditionally display)
+      
           if (price != null) ...[
             SizedBox(height: 8),
             Text(
