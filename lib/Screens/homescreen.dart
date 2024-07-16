@@ -136,7 +136,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
               SizedBox(height: 16),
-              // Wrap GridView.builder in an Expanded widget
+             
               GridView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
@@ -153,7 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: ImageCard(
                       imageHeight: 120,
                       imageWidth: 200,
-                      imagePath: images[index % images.length], // Use modulo to loop images
+                      imagePath: images[index % images.length], 
                       name: deals[index],
                       price: 'Rs250',
                       tag: '20% off',
@@ -187,10 +187,10 @@ class _HomeScreenState extends State<HomeScreen> {
             label: 'Profile',
           ),
         ],
-        showSelectedLabels: true, // Show labels for selected items
-        showUnselectedLabels: true, // Show labels for unselected items
-        selectedItemColor: Colors.green, // Color of selected item
-        unselectedItemColor: Colors.green.withOpacity(0.5), // Color of unselected items
+        showSelectedLabels: true,
+        showUnselectedLabels: true, 
+        selectedItemColor: Colors.green, 
+        unselectedItemColor: Colors.green.withOpacity(0.5), 
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
       ),
