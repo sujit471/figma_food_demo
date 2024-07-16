@@ -23,11 +23,11 @@ class Ratings extends StatelessWidget {
         Row(
           children: [
             Container(
-              width: 30.0, // Adjust as needed
-              height: 40.0, // Adjust as needed
+              width: 30.0, 
+              height: 40.0,
               child: ClipOval(
                 child: Image.asset(
-                  image!, // Replace with your image asset
+                  image!, 
                   fit: BoxFit.cover,
                 ),
               ),
@@ -45,18 +45,18 @@ class Ratings extends StatelessWidget {
                 ),
                 Wrap(
                   alignment: WrapAlignment.start,
-                  // Align children starting from the left
+                 
                   spacing: -2.0,
-                  // Negative spacing to overlap icons
+                
                   children: [
-                    // Loop to generate full stars
+                   
                     for (int i = 0; i < 5; i++)
                       Icon(Icons.star, color: Colors.green),
                   ],
                 ),
               ],
             ),
-            Spacer(), // This will push the next text to the rightmost
+            Spacer(),
             Text(
               name2,
               style: TextStyle(
