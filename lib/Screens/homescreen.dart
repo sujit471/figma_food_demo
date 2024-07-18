@@ -60,6 +60,10 @@ class _HomeScreenState extends State<HomeScreen> {
       _selectedIndex = index;
     });
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 202cc522e6643469d0bb9cca307a67de60d62a0a
     if (index == 1) {
       // Navigate to the Category screen or perform any action
     } else if (index == 0) {
@@ -79,6 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+<<<<<<< HEAD
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
@@ -98,6 +103,34 @@ class _HomeScreenState extends State<HomeScreen> {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
                   borderSide: BorderSide.none,
+=======
+      appBar: AppBar(),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 10), // Spacer for padding
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Color.fromRGBO(179, 241, 191, 1),
+                  ),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      suffixIcon: Icon(Icons.search),
+                      hintText: 'Search foods or items',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                    onChanged: (value) {
+                      // Implement search functionality here
+                    },
+                  ),
+>>>>>>> 202cc522e6643469d0bb9cca307a67de60d62a0a
                 ),
                 contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
               ),
@@ -117,6 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 200,
               child: Stack(
                 children: [
+<<<<<<< HEAD
                   Padding(
                     padding: const EdgeInsets.only(left: 8, right: 8),
                     child: PageView.builder(
@@ -141,6 +175,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: _buildPageIndicator(),
                     ),
+=======
+                  Text(
+                    'Categories',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+>>>>>>> 202cc522e6643469d0bb9cca307a67de60d62a0a
                   ),
                 ],
               ),
@@ -243,8 +282,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
+<<<<<<< HEAD
                     '* Recommendation',
                     style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+=======
+                    'Deals',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+>>>>>>> 202cc522e6643469d0bb9cca307a67de60d62a0a
                   ),
                   Text("See all"),
                 ],
@@ -305,6 +349,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 icon: BuildBottomNavItem('icon/home-smile.svg', 0),
                 label: 'Home',
               ),
+<<<<<<< HEAD
               BottomNavigationBarItem(
                 icon: BuildBottomNavItem('icon/menu.svg', 1),
                 label: 'Category',
@@ -316,6 +361,35 @@ class _HomeScreenState extends State<HomeScreen> {
               BottomNavigationBarItem(
                 icon: BuildBottomNavItem('icon/profile.svg', 3),
                 label: 'Profile',
+=======
+              SizedBox(height: 16),
+             
+              GridView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 4.0,
+                  mainAxisSpacing: 4.0,
+                  childAspectRatio: 0.75, // Adjust as needed
+                ),
+                itemCount: deals.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ImageCard(
+                      imageHeight: 120,
+                      imageWidth: 200,
+                      imagePath: images[index % images.length], 
+                      name: deals[index],
+                      price: 'Rs250',
+                      tag: '20% off',
+                      tagColor: Colors.grey,
+                      showRating: true,
+                    ),
+                  );
+                },
+>>>>>>> 202cc522e6643469d0bb9cca307a67de60d62a0a
               ),
             ],
             showSelectedLabels: true, // Show labels for selected items
@@ -330,6 +404,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
+<<<<<<< HEAD
     );
   }
 
@@ -351,6 +426,34 @@ class _HomeScreenState extends State<HomeScreen> {
         height: 32,
         width: 32,
         color: isSelected ? Colors.black : Colors.black,
+=======
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Color.fromRGBO(179, 241, 191, 1),
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.category),
+            label: 'Category',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.notifications),
+            label: 'Notification',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+        ],
+        showSelectedLabels: true,
+        showUnselectedLabels: true, 
+        selectedItemColor: Colors.green, 
+        unselectedItemColor: Colors.green.withOpacity(0.5), 
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+>>>>>>> 202cc522e6643469d0bb9cca307a67de60d62a0a
       ),
     );
   }

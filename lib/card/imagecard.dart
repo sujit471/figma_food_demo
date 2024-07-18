@@ -11,10 +11,14 @@ class ImageCard extends StatelessWidget {
   final double imageWidth;
   final double imageHeight;
   final String? price;
+<<<<<<< HEAD
   final bool showRating;
   final double? space;
 
   final String? linecut;
+=======
+  final bool showRating; 
+>>>>>>> 202cc522e6643469d0bb9cca307a67de60d62a0a
 
   ImageCard({
     required this.imagePath,
@@ -31,6 +35,7 @@ class ImageCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     int index = 0;
     return GestureDetector(
       onTap: () {
@@ -64,6 +69,26 @@ class ImageCard extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                     borderRadius: BorderRadius.circular(8),
+=======
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8)
+      ),
+      width: 150, // Fixed width
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+        
+          Stack(
+            children: [
+              Container(
+                width: imageWidth, 
+                height: imageHeight, 
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(imagePath),
+                    fit: BoxFit.cover,
+>>>>>>> 202cc522e6643469d0bb9cca307a67de60d62a0a
                   ),
                 ),
                 if (tag != null)
@@ -117,6 +142,20 @@ class ImageCard extends StatelessWidget {
                 ],
               ),
             ],
+<<<<<<< HEAD
+=======
+          ),
+          if (name != null) ...[
+            SizedBox(height: 8),
+            Text(
+              name!,
+              textAlign: TextAlign.start,
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+          ],
+          if (showRating) ...[
+            SizedBox(height: 8),
+>>>>>>> 202cc522e6643469d0bb9cca307a67de60d62a0a
             Row(
               children: [
                 if (price != null) ...[
@@ -148,7 +187,24 @@ class ImageCard extends StatelessWidget {
               ],
             ),
           ],
+<<<<<<< HEAD
         ),
+=======
+      
+          if (price != null) ...[
+            SizedBox(height: 8),
+            Text(
+              price!,
+              textAlign: TextAlign.start,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Color.fromRGBO(179, 241, 191, 1),
+              ),
+            ),
+          ],
+        ],
+>>>>>>> 202cc522e6643469d0bb9cca307a67de60d62a0a
       ),
     );
   }
