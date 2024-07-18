@@ -1,216 +1,244 @@
 import 'dart:ui';
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../List/list.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
+import '../Addtocarbottomsheet/bottom_sheet.dart';
+import '../Constant/list.dart';
 import '../card/imagecard.dart';
+import '../provider/card_provider.dart';
 import '../widgets/ratings.dart';
 import '../widgets/row.dart';
-
 class Detailspage extends StatefulWidget {
-  const Detailspage({Key? key}) : super(key: key);
+  final String imagePath;
+  const Detailspage({Key? key,  required this.imagePath}) : super(key: key);
 
   @override
   State<Detailspage> createState() => _DetailspageState();
 }
 
 class _DetailspageState extends State<Detailspage> {
+  int count = 0;
+  final ScrollController _scrollController = ScrollController();
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
   @override
-  int count = 1 ;
+
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomSheet:
+      const AddToCard(),
       appBar: AppBar(
-        title: Text("Product details"),
+        toolbarHeight: 52,
+        backgroundColor: Colors.transparent,
+        title: const Text("Product details",style:TextStyle(
+          fontSize: 16,
+        )),
         actions: [
-          Icon(Icons.message),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                SvgPicture.asset('icon/bag.svg'),
+                Positioned(
+                  right: 0,
+                  bottom: 7,
+                  child: Consumer<CartProvider>(
+                    builder: (context, cart, child) {
+                      return cart.count > 0
+                          ? Container(
+                        padding: const EdgeInsets.all(2),
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        constraints: const BoxConstraints(
+                          minWidth: 16,
+                          minHeight: 16,
+                        ),
+                        child: Text(
+                          '${cart.count}',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 10,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      )
+                          : Container();
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SingleChildScrollView(
+
+
+      body: SingleChildScrollView(
+        controller: _scrollController,
+        child: Padding(
+          padding: const EdgeInsets.only(bottom:90),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start, // Align children to the start
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Image.asset(
-                'images/food1.jpg',
+                widget.imagePath,
               ),
-              SizedBox(
-                height: 12,
-              ),
+            const SizedBox(height: 16,),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    for (int index = 0; index < images.length; index++)
-                      Padding(
-                        padding: const EdgeInsets.only(right: 8.0),
-                        child: Container(
+                child: Padding(
+                  padding:   const EdgeInsets.fromLTRB(0, 16, 0,24),
+                  child: Row(
 
-                          decoration: BoxDecoration(
+                    children: [
+                      SizedBox(width: 8,),
+                      for (int index = 0; index < images.length; index++)
+                        Padding(
+                          padding: const EdgeInsets.only(right: 16.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
 
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: ImageCard(
+                              imageHeight: 72,
+                              imageWidth: 72,
+                              imagePath: widget.imagePath,
 
-                          ),
-                          child: ImageCard(
-                            imageHeight: 100,
-                            imagePath: images[0],
-                            //name: names[index],
+                            ),
                           ),
                         ),
-                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start, // Align children to the start
+                  children: [
+                    const Text("Ekaa Kombuchaa - fressa - 300ml",style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    )),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ItemsinRow(name: "Rs250", name2: ""),
+                        Wrap(
+                          alignment: WrapAlignment.start,
+
+                          spacing: -2.0,
+
+                          children: [
+
+                            for (int i = 0; i < 4; i++)
+                              const Icon(Icons.star, color: Colors.green),
+
+
+                            if (4.5 % 1 != 0)
+                              const Icon(Icons.star_half, color: Colors.green),
+                          ],
+                        ),
+                        const Text("(65)"),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    ItemsinRow(name: "Variations", name2: "Strawberry,300ml  > "),
+                    const SizedBox(height: 12,),
+                    const Padding(
+                      padding: EdgeInsets.fromLTRB(0,16, 16, 16),
+                      child: Text(
+                        "  Kombucha General Health Benefits:1. Probitics for Gut health2. Prebiotics (gluconic acid) for Gut health 3. Detoxification effect (glucuronic acid) 4. Antimicrobials effect (Acetic acid)5. Antioxidants6.",style: TextStyle(
+                        fontSize: 15,
+                      ),),
+                    ),
+
                   ],
                 ),
               ),
-              SizedBox(
-                height: 12,
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text("Recommended For you",style: TextStyle(fontSize: 24,color: Colors.green,fontWeight: FontWeight.bold),),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start, // Align children to the start
-                children: [
-                  const Text("Ekaa Kombuchaa - fressa - 300ml",style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24,
-                  )),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ItemsinRow(name: "Rs250", name2: ""),
-                      Wrap(
-                        alignment: WrapAlignment.start,
-                        // Align children starting from the left
-                        spacing: -2.0,
-                        // Negative spacing to overlap icons
-                        children: [
-                          // Loop to generate full stars
-                          for (int i = 0; i < 4; i++)
-                            Icon(Icons.star, color: Colors.green),
-
-                          // Conditionally add a half star if needed
-                          if (4.5 % 1 != 0)
-                            Icon(Icons.star_half, color: Colors.green),
-                        ],
-                      ),
-                      Text("(65)"),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  ItemsinRow(name: "Variations", name2: "Strawberry,300ml  > "),
-                  SizedBox(height: 12,),
-                  const Text(
-                      "Kombucha  General Health benefits s. probitosocs for guthealt, prebitiosc sds fedesdsd ascsds health is "
-                          "and iorersdsdcsdcssd as it ht ei name o tdees"),
-                  SizedBox(height: 12,),
-                ],
-              ),
-              const Text("Recommended For you",style: TextStyle(fontSize: 24,color: Colors.green,fontWeight: FontWeight.bold),),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    for (int index = 0; index < images.length; index++)
-                      Padding(
-                        padding: const EdgeInsets.only(right: 8.0),
-                        child: ImageCard(
-                            imagePath: images[index],
-                            name: names[index],
-                            showRating: true,
-                            price: "Rs 250"),
-                      ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start, // Align children to the start
-                children: [
-                  const Text("Review & ratings",style: TextStyle(fontWeight:FontWeight.w100,fontSize: 16, ),),
-                  SizedBox(height: 8,),
-                  Row(
+              Padding(
+                padding:   const EdgeInsets.fromLTRB(0, 16, 0,24),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
                     children: [
-                      Text("4.4",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
-                      SizedBox(width: 6,),
-                      Wrap(
-                        alignment: WrapAlignment.start,
-                        // Align children starting from the left
-                        spacing: -2.0,
-                        // Negative spacing to overlap icons
-                        children: [
-                          // Loop to generate full stars
-                          for (int i = 0; i < 4; i++)
-                            Icon(Icons.star, color: Colors.green),
-
-                          // Conditionally add a half star if needed
-                          if (4.5 % 1 != 0)
-                            Icon(Icons.star_half, color: Colors.green),
-                        ],
-                      ),
+                      const SizedBox(width: 8,),
+                      for (int index = 0; index < images.length; index++)
+                        Padding(
+                          padding: const EdgeInsets.only(right: 8.0),
+                          child: ImageCard(
+                            imageHeight: 136,
+                              imageWidth: 280,
+                              imagePath: images[index],
+                              name: names[index],
+                              showRating: true,
+                              price: "Rs 250"),
+                        ),
                     ],
                   ),
-                  SizedBox(height: 8,),
-                  const Text("Based on 65 Ratings"),
-                  SizedBox(height: 15,),
-                  Ratings(image: 'images/food1.jpg', name: "Wade waren", name2: "2h ago", description: "this is an amaizing food review form yhe stroerere with the top notch faclitiss highly recommended"),
-                  SizedBox(height: 20,),
-                  Ratings(image: "images/food2.jpg", name: "Theresa Webb", name2: "2d ago", description: "Top notch service provided "),
-                  SizedBox(height: 20,),
-                  Ratings(image:"images/food3.jpg", name:"Cameroon williamson", name2: "3m Ago", description: "higly recommended to go to eat from this place and food is great"),
-                  SizedBox(height: 20,),
-                  Center(child: Text("View all reviews",style: TextStyle(color: Colors.green),)),
-                  SizedBox(height: 10,),
-                  Row(
-                    children: [Row(
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start, // Align children to the start
+                  children: [
+                    const Text("Review & ratings",style: TextStyle(fontWeight:FontWeight.w100,fontSize: 16, ),),
+                    const SizedBox(height: 8,),
+                    Row(
                       children: [
-                        IconButton(
-                          onPressed: () {
-                            setState(() {
-                              if (count > 1) count--;
-                            });
-                          },
-                          icon: Icon(Icons.remove, color: Colors.green),
-                        ),
-                        Text(
-                          '$count',
-                          style: TextStyle(fontSize: 18),
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            setState(() {
-                              count++;
-                            });
-                          },
-                          icon: Icon(Icons.add, color: Colors.green),
+                        const Text("4.4",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
+
+                        Wrap(
+                          alignment: WrapAlignment.start,
+
+                          spacing: -2.0,
+
+                          children: [
+
+                            for (int i = 0; i < 4; i++)
+                              const Icon(Icons.star, color: Colors.green),
+
+                            if (4.5 % 1 != 0)
+                              const Icon(Icons.star_half, color: Colors.green),
+                          ],
                         ),
                       ],
                     ),
-                      Spacer(),
-                      ElevatedButton.icon(
-                        onPressed: () {
-                          // Add to cart functionality
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green, // Background color
-                          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8), // Padding inside button
-                          textStyle: TextStyle(fontSize: 16),
-                        ),
-                        icon: Icon(Icons.shopping_bag, color: Colors.white),
-                        label: Text('Add to cart',style: TextStyle(
-                          color: Colors.white,
-                        ),),
-                      ),
+                    const SizedBox(height: 16,),
+                    const Text("Based on 65 Ratings"),
+                    const Ratings(image: 'images/food1.jpg', name: "Wade waren", name2: "2h ago", description: "Amazing experience at this computer retail store! The staff was knowledgeable and helped me find the perfect laptop within my budget. Fast service and a wide selection of products. Highly recommended!", showImages: true,maxImages: 4,),
+                    const Ratings(image: "images/food2.jpg", name: "Theresa Webb", name2: "2d ago", description: "Top-notch customer service! I visited this computer store looking for a gaming PC, and the team went above and beyond to guide me through the options. I'm thrilled with my purchase and will be a loyal customer!",showImages: true,maxImages: 2,),
+                    const Ratings(image:"images/food3.jpg", name:"Cameroon williamson", name2: "3m Ago", description: "Impressed with the quality and variety of computers available here. The store had everything from sleek ultrabooks to powerful workstations. I found exactly what I needed, and the price was competitive too!", showImages: false,maxImages: 0,),
+                    const Center(child: Text("View all reviews",style: TextStyle(color: Colors.green),)),
 
-
-                    ],
-                  ),
-                ],
+                    // const AddToCard(),
+                  ],
+                ),
               )
             ],
           ),

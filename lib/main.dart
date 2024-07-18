@@ -1,11 +1,16 @@
 import 'package:figma_food_app/Screens/detailspage.dart';
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
+import 'provider/card_provider.dart';
 import 'Screens/homescreen.dart';
 
-
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => CartProvider(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

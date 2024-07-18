@@ -13,8 +13,8 @@ class ItemsinRow extends StatelessWidget {
         children: [
           Text(name!,
 
-            style: TextStyle(
-              fontSize: 24,
+            style: const TextStyle(
+              fontSize: 16,
             color: Colors.black
 
           ),),
